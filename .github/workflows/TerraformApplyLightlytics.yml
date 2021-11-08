@@ -16,20 +16,20 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          working-directory: ./terraform
-          run: terraform init -input=false
+        working-directory: ./terraform
+        run: terraform init -input=false
       - name: Terraform plan
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          working-directory: ./terraform
-          run: terraform plan -lock=false -out ./terraform.plan
+        working-directory: ./terraform
+        run: terraform plan -lock=false -out ./terraform.plan
       - name: Terraform show
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          working-directory: ./terraform
-          run: terraform show -json ./terraform.plan > ./plan.json
+        working-directory: ./terraform
+        run: terraform show -json ./terraform.plan > ./plan.json
       - uses: lightlytics/publisher@v1.1
         id: ll-publisher
         with:
